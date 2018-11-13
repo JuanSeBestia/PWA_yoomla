@@ -21,4 +21,26 @@ Edit the sw.js according to what you need for your page, for this case we will p
 
 With FTP or other way, upload the files sw.js, manifest.json and assets (like offline.html, 404.html, logo_inkremental_192.png) to the root where Joomla is located
 
-### 5.
+### 5. Add custom code in head
+
+In Joomla admin --> Extensions --> Templates --> Default Template --> Custom Code --> Before </head> add follow lines
+
+``` html
+<!-- SW configs -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.log('Error', err));
+    }
+  </script>
+
+<!-- PWA configs -->
+<link rel="manifest" href="/manifest.json">
+
+<!-- Optional mobile view configs -->
+<meta name="theme-color" content="#03a9f4">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+```
+![joomla_pwa_1.png](joomla_pwa_1.png)

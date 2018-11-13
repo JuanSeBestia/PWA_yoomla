@@ -105,15 +105,15 @@ else {
         })
     );
     
-    // Not use on inkremental.co
-    var articleHandler = workboxSW.strategies.networkFirst({
+     // Not use on inkremental.co
+     var articleHandler = workbox.strategies.networkFirst({
         cacheName: 'articles-cache',
         cacheExpiration: {
             maxEntries: 100
         }
     });
 
-    workboxSW.router.registerRoute('/**/pages/article*.html', args => {
+    workbox.routing.registerRoute('/**/pages/article*.html', args => {
         return articleHandler.handle(args).then(response => {
             if (!response) {
                 return caches.match('assets_pwa/offline.html');
