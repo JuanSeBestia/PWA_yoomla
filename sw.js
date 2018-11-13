@@ -48,7 +48,7 @@ else {
     //workbox.precaching.precacheAndRoute([]);
 
     workbox.routing.registerRoute(
-        /.*\.(?:js)/,
+        /.*\.(?:js).*/,
         workbox.strategies.cacheFirst({
             cacheName: 'js-cache',
             plugins: [
@@ -61,20 +61,32 @@ else {
     );
 
     workbox.routing.registerRoute(
-        /.*\.css/,
+        /.*\.css.*/,
         workbox.strategies.cacheFirst({
             cacheName: 'styles-cache',
         })
     );
 
     workbox.routing.registerRoute(
-        /.*\.(?:png|jpg|jpeg|svg|gif)/,
+        /.*\.(?:png|jpg|jpeg|svg|gif).*/,
         workbox.strategies.cacheFirst({
             cacheName: 'images-cache',
             plugins: [
                 new workbox.expiration.Plugin({
                     maxEntries: 500,
                     maxAgeSeconds: 7 * 24 * 60 * 60,
+                })
+            ],
+        })
+    );
+
+    workbox.routing.registerRoute(
+        /.*\.(?:woff2|ttf|otf|svg|gif).*/,
+        workbox.strategies.cacheFirst({
+            cacheName: 'fonts-cache',
+            plugins: [
+                new workbox.expiration.Plugin({
+                    maxEntries: 100,
                 })
             ],
         })
@@ -94,8 +106,8 @@ else {
     );
 
     workbox.routing.registerRoute(
-        /.*(?:googleapis|gstatic)\.com.*$/,
-        workbox.strategies.staleWhileRevalidate({
+        /.*(?:googleapis|gstatic|googletagmanager)\.com.*$/,
+        workbox.strategies.networkFirst({
             cacheName: 'googleapis-maps',
             plugins: [
                 new workbox.expiration.Plugin({
