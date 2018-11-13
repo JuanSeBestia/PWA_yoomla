@@ -43,4 +43,7 @@ In Joomla admin --> Extensions --> Templates --> Default Template --> Custom Cod
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
 ```
+
 ![joomla_pwa_1.png](joomla_pwa_1.png)
+
+### 5. Add to home screen and enjoy
